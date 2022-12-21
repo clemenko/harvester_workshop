@@ -2,6 +2,17 @@
 
 [config example](https://docs.harvesterhci.io/v1.1/install/harvester-configuration/)
 
+## Equinix
+
+console - https://console.equinix.com/projects/
+
+
+### equinix cli - mac
+
+```bash
+brew tap equinix/homebrew-tap
+brew install metal-cli
+```
 
 ## Cloud Init Template
 ```bash
@@ -31,6 +42,9 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
 ```
 
+## image 
+
+https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2
 
 
 ### harvester cli
