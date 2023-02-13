@@ -1,5 +1,9 @@
 # harvester_workshop
 
+## Manual Install
+
+[Manual install video.](https://youtu.be/mLXrSW8DCfk)
+
 [config example](https://docs.harvesterhci.io/v1.1/install/harvester-configuration/)
 
 ## Equinix

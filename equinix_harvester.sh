@@ -14,8 +14,8 @@ echo -n " - getting ip : "
 # get ip
 IP=""
 until [ ! -z "$IP" ]; do
-    sleep 1
     IP=$(curl -s https://api.equinix.com/metal/v1/devices/$ID -H 'x-auth-token: '$EQ_TOKEN -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' -H 'content-type: application/json' | jq -r '.ip_addresses[0].address')
+    sleep 3
 done
 echo "IP = "$IP
 
