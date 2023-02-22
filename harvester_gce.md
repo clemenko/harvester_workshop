@@ -36,7 +36,7 @@ gcloud compute instances create rocky-temp --project=robust-charge-98613 --zone=
 
 # wait until done
 # ssh $(gcloud compute instances list | grep RUN | awk '{print $5}') ls /
-while true; do clear; ssh $(gcloud compute instances list | grep RUN | awk '{print $5}') 'ls /dd_done'; sleep 5; done
+while true; do clear; ssh $(gcloud compute instances list | grep RUN | awk '{print $5}') 'ls dd_done'; sleep 5; done
 
 # shutdown and delete vm
 gcloud compute instances delete rocky-temp --zone=$(gcloud config get-value compute/zone) --quiet
