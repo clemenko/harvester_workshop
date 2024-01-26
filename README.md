@@ -241,6 +241,10 @@ Once booted we can interact with the VM is a couple of ways. SSH is the best, bu
 
 ![webvnc](images/webvnc.jpg)
 
+Here is what it looks like.
+
+![console](images/console.jpg)
+
 ## Advanced Topics
 
 ### Harvester cli
