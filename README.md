@@ -237,6 +237,9 @@ The nice thing is that we can change/override the template settings here.
 
 ![create_vm](images/create_vm.jpg)
 
+Once booted we can interact with the VM is a couple of ways. SSH is the best, but Harvester also has a remote console that can be used.
+
+![webvnc](images/webvnc.jpg)
 
 ## Advanced Topics
 
