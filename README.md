@@ -241,7 +241,7 @@ Once booted we can interact with the VM is a couple of ways. SSH is the best, bu
 
 ![webvnc](images/webvnc.jpg)
 
-Here is what it looks like.
+The good news is that we can leverage the `hashed_passwd` to log into the vm. Please keep in mind that if you disconnect before logging out the next time we connect it will have the same session.
 
 ![console](images/console.jpg)
 
