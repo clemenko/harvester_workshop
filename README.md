@@ -280,15 +280,7 @@ current-context: "local"
 Another way is to use an environment variable.  
 `export HARVESTER_CONFIG=/Users/clemenko/Desktop/local.yaml`
 
-```bash
-clembookair:clemenko rke2 $ harvester vm list
-STATE     NAME      NODE      CPU       RAM       IP Address
-clembookair:clemenko rke2 $ harvester vm create --template rocky workshop
-WARN[0000] You are using a template flag, please be aware that any other flag will be IGNORED! 
-clembookair:clemenko rke2 $ harvester vm list
-STATE     NAME       NODE      CPU       RAM       IP Address
-Running   workshop   ser5      4         8Gi       192.168.1.172
-```
+![cli](images/cli.jpg)
 
 There is a bug right now in the cli that requires a `Network` named `vlan1`. Just add it even though it is not used.
 
