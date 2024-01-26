@@ -291,12 +291,10 @@ Please keep in mind that the nodes and terraform are alpha!
 
 iPXE is also an option for netbooting remotely. Here are some good examples : https://github.com/harvester/ipxe-examples/tree/main/general.
 
-## Profit
-
-![success](images/success.jpg)
-
 ## More Resources
 
 **https://rfed.io/links**
 
+## Profit
 
+![success](images/success.jpg)
