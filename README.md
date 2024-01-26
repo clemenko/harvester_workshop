@@ -228,20 +228,76 @@ users:
 
 **Now we can click Create** to save.
 
-
 ## Boot VMS
 
+We are now ready to boot some VMs.  
+Navigate to `Virtual Machines` and click create.  
+We can now check the `Use VM Template` button and select the `rocky` one we created.  
+The nice thing is that we can change/override the template settings here.
+
+![create_vm](images/create_vm.jpg)
 
 
-### harvester cli
+## Advanced Topics
 
-https://github.com/belgaied2/harvester-cli
-export HARVESTER_CONFIG=/Users/clemenko/Desktop/local.yaml
+### Harvester cli
 
+There is a beta cli available at https://github.com/belgaied2/harvester-cli.
 
-### ipxe
+To config the cli we need to create `~/.harvester/config`. Note the `insecure-skip-tls-verify: true` as a workaround the x509 issues.
 
-[https://github.com/harvester/ipxe-examples](https://github.com/harvester/ipxe-examples)
+```yaml
+clembookair:clemenko rke2 $ cat ~/.harvester/config 
+apiVersion: v1
+kind: Config
+clusters:
+- name: "local"
+  cluster:
+    server: "https://192.168.1.9/k8s/clusters/local"
+    insecure-skip-tls-verify: true
 
-https://docs.harvesterhci.io/v1.2/install/pxe-boot-install
+users:
+- name: "local"
+  user:
+    token: "kubeconfig-user-qzwhg59plf:qd7rvhhmmpqcfghvgpwt8b8wd4k8dqsscvvttq2fdhpp49wsfl89kn"
+
+contexts:
+- name: "local"
+  context:
+    user: "local"
+    cluster: "local"
+
+current-context: "local"
+```
+
+Another way is to use an environment variable.  
+`export HARVESTER_CONFIG=/Users/clemenko/Desktop/local.yaml`
+
+```bash
+clembookair:clemenko rke2 $ harvester vm list
+STATE     NAME      NODE      CPU       RAM       IP Address
+clembookair:clemenko rke2 $ harvester vm create --template rocky workshop
+WARN[0000] You are using a template flag, please be aware that any other flag will be IGNORED! 
+clembookair:clemenko rke2 $ harvester vm list
+STATE     NAME       NODE      CPU       RAM       IP Address
+Running   workshop   ser5      4         8Gi       192.168.1.172
+```
+
+There is a bug right now in the cli that requires a `Network` named `vlan1`. Just add it even though it is not used.
+
+### PXE & iPXE
+
+Harvester can be booted and installed from PXE and iPXE. I have some notes in this repo and in https://github.com/clemenko/harvester-equinix-metal.  
+Please keep in mind that the nodes and terraform are alpha!
+
+iPXE is also an option for netbooting remotely. Here are some good examples : https://github.com/harvester/ipxe-examples/tree/main/general.
+
+## Profit
+
+![success](images/success.jpg)
+
+## More Resources
+
+**https://rfed.io/links**
+
 
