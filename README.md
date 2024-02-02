@@ -210,6 +210,7 @@ runcmd:
   - - sysctl
     - -w
     - net.ipv6.conf.all.disable_ipv6=1
+ssh_pwauth: True
 users:
   - name: root
     hashed_passwd: $6$fgls6Nv/5eS$iozPi2/3f9SE7cR5mvTlriGkRZRSuhzFs0s6fVWzUXiL19E27hVgAo3mZwCdzlDsiUq1YRJeyPtql6FkPhMZP0
@@ -246,6 +247,14 @@ The good news is that we can leverage the `hashed_passwd` to log into the vm. Pl
 ![console](images/console.jpg)
 
 ## Advanced Topics
+
+### Password Reset
+
+If you have a GUI that won't take your password see if you can `ssh` into the node. Once `ssh`'d in run.
+
+```bash
+kubectl  -n cattle-system exec $(kubectl -n cattle-system get pods -l app=rancher --no-headers | head -1 | awk '{ print $1 }') -c rancher -- reset-password
+```
 
 ### Harvester cli
 
