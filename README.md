@@ -246,7 +246,7 @@ The good news is that we can leverage the `hashed_passwd` to log into the vm. Pl
 
 ![console](images/console.jpg)
 
-## Advanced Topics
+## Advanced Topics - Optional
 
 ### Password Reset
 
@@ -299,6 +299,22 @@ Harvester can be booted and installed from PXE and iPXE. I have some notes in th
 Please keep in mind that the nodes and terraform are alpha!
 
 iPXE is also an option for netbooting remotely. Here are some good examples : https://github.com/harvester/ipxe-examples/tree/main/general.
+
+### Harvester Registry Credentials
+
+Harvester can take advantage of the containerd credentials for registries.
+
+To view you can hit the backtick key to get a console "\`". Then enter `kubectl  get settings containerd-registry -o yaml` 
+
+```bash
+cat << EOF | kubectl apply -f - 
+apiVersion: harvesterhci.io/v1beta1
+kind: Setting
+metadata:
+  name: containerd-registry
+value: '{"Mirrors":{"rgcrprod.azurecr.us":{"Endpoints":["rgcrprod.azurecr.us"],"Rewrites":null}},"Configs":{"rgcrprod.azurecr.us":{"Auth":null,"TLS":{"CAFile":"","CertFile":"","KeyFile":"","InsecureSkipVerify":false}}},"Auths":null}'
+EOF
+```
 
 ## More Resources
 
