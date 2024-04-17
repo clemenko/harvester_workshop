@@ -24,7 +24,7 @@
 
 ## Hardware
 
-Basic minimum 32gb of ram and 8 cores PER node. 1, 3, or 5 nodes is ideal. As fast as networking as possible.
+Basic minimum 16gb of ram and 8 cores PER node. 1, 3, or 5 nodes is ideal. As fast as networking as possible.
 
 ## Background
 
