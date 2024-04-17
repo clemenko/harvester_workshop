@@ -24,7 +24,7 @@
 
 ## Hardware
 
-Basic minimum 32gb of ram and 8 cores PER node. 1, 3, or 5 nodes is ideal. As fast as networking as possible. 
+Basic minimum 32gb of ram and 8 cores PER node. 1, 3, or 5 nodes is ideal. As fast as networking as possible.
 
 ## Background
 
@@ -34,34 +34,39 @@ Harvester is a modern Hyperconverged infrastructure (HCI) solution built for bar
 
 [Watch the manual install video](https://youtu.be/mLXrSW8DCfk)?
 
-The docs have a [config example](https://docs.harvesterhci.io/v1.2/install/harvester-configuration/) if you are looking to install via PXE.
-
-We are going to use the [USB install docs](https://docs.harvesterhci.io/v1.2/install/usb-install). From a [Ventoy](http://ventoy.net/) thumb drive.
-
-**ISO** : https://releases.rancher.com/harvester/v1.2.1/harvester-v1.2.1-amd64.iso
+The docs have a [config example](https://docs.harvesterhci.io/v1.3/install/harvester-configuration/) if you are looking to install via PXE.
 
 ## Manual Install Steps
 
-### Boot from ISO
+### Boot Options
 
-Select the Harvester ISO.  
-![ventoy](images/ventoy.jpg)  
-Select `Boot in normal mode`.
+#### USB/ISO
+
+We are not going to use USB for the workshop. However it is a valid install method.  
+USB Docs: https://docs.harvesterhci.io/v1.3/install/usb-install  
+**ISO** : https://releases.rancher.com/harvester/v1.3.0/harvester-v1.3.0-amd64.iso
+
+#### Network - iPXE <-- Workshop
+
+For the workshop we are going to use PXE booting since it is a little faster.  
+Check the PXE docs for how to set it up https://docs.harvesterhci.io/v1.3/install/pxe-boot-install.  
+Select Network Boot on the device.  
+![pxe](images/ipxe.jpg)
+
+#### Hardware Check
+
+You may see a Hardware Check   
+![check](images/check.jpg)  
 
 #### Installation Mode
 
 If this is the first node choose `Create a new Harvester cluster`.  
 ![mode](images/mode.jpg)  
 
-#### Installation Disk Selection
+#### Installation Disk 
 
-For the workshop we are going to use the `nvme` drive. In production we should split the boot and the data drives.  
+Since we are using smaller hardware for the workshop we will only see one drive. Please pay attention to the Persistent size. This is partition is used for images and other system data. NOT VM data. In production split the volumes.  
 ![drive](images/drive.jpg)  
-
-#### Data Disk Selection
-
-For the workshop we only have 1 drive. `Use the installation disk...`
-![data](images/data.jpg)  
 
 #### Hostname
 
@@ -70,9 +75,10 @@ Pick a fun hostname!
 
 #### Network
 
-For the workshop we are going to use a static IP in the 192.168.X.X range. Select the NIC that is `up`.  
+For the workshop we are going to use a static IP in the 192.168.8.X range. Select the NIC that is `up`.  
 ![network](images/network.jpg)  
 
+**Harvester requires at least 10Gbps for production use!**  
 VLAN ID = `null`  
 Bond Mode = `Active-Backup`  
 IPv4 Method = `Static`  
@@ -109,15 +115,10 @@ Enter a local NTP if we have one. Or use the default is the node is online.
 If we need a proxy to reach the internet we can enter it here.  
 ![proxy](images/proxy.jpg)  
 
-#### Pre-Load SSH Keys
-
-Harvester can load ssh keys from any https service.  
-![ssh_keys](images/ssh_keys.jpg)  
-
 #### Remote Config
 
 Harvester can load additional configs from an http service.  
-Feel free to look at the [config example docs](https://docs.harvesterhci.io/v1.2/install/harvester-configuration/).  
+Feel free to look at the [config example docs](https://docs.harvesterhci.io/v1.2/install/harvester-configuration/). This can be 100% automated with iPXE.  
 ![remote_config](images/remote_config.jpg)  
 
 #### Confirm Installation
