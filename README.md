@@ -36,46 +36,48 @@ Harvester is a modern Hyperconverged infrastructure (HCI) solution built for bar
 
 The docs have a [config example](https://docs.harvesterhci.io/v1.3/install/harvester-configuration/) if you are looking to install via PXE.
 
-## Manual Install Steps
+## PXE Install Steps
 
-### Boot Options
-
-#### USB/ISO
-
-We are not going to use USB for the workshop. However it is a valid install method.  
-USB Docs: https://docs.harvesterhci.io/v1.3/install/usb-install  
+If you want USB/ISO check the docs: https://docs.harvesterhci.io/v1.3/install/usb-install  
 **ISO** : https://releases.rancher.com/harvester/v1.3.0/harvester-v1.3.0-amd64.iso
 
-#### Network - iPXE <-- Workshop
+### Network - iPXE <-- Workshop
 
 For the workshop we are going to use PXE booting since it is a little faster.  
 Check the PXE docs for how to set it up https://docs.harvesterhci.io/v1.3/install/pxe-boot-install.  
-Select Network Boot on the device.  
+There may be a https://gist.github.com/clemenko/8df23cb764b326defcb4624b58ab4da2 for setting it up.  
+Select Network Boot on the device. --> `Harvester Installer 1.3.0`
+
 ![pxe](images/ipxe.jpg)
 
 #### Hardware Check
 
-You may see a Hardware Check   
+You may see a Hardware Check if there is not enough resources. Don't panic, proceed.  
+
 ![check](images/check.jpg)  
 
 #### Installation Mode
 
 If this is the first node choose `Create a new Harvester cluster`.  
+
 ![mode](images/mode.jpg)  
 
-#### Installation Disk 
+#### Installation Disk
 
 Since we are using smaller hardware for the workshop we will only see one drive. Please pay attention to the Persistent size. This is partition is used for images and other system data. NOT VM data. In production split the volumes.  
+
 ![drive](images/drive.jpg)  
 
 #### Hostname
 
 Pick a fun hostname!  
+
 ![hostname](images/hostname.jpg)  
 
 #### Network
 
 For the workshop we are going to use a static IP in the 192.168.8.X range. Select the NIC that is `up`.  
+
 ![network](images/network.jpg)  
 
 **Harvester requires at least 10Gbps for production use!**  
@@ -83,47 +85,56 @@ VLAN ID = `null`
 Bond Mode = `Active-Backup`  
 IPv4 Method = `Static`  
 MTU = `null`  
+
 ![ip](images/ip.jpg)
 
 #### DNS Servers
 
 Pick a local or remote DNS server.  
+
 ![dns](images/dns.jpg)  
 
 #### Configure VIP
 
 We have a couple options for the VIP. I tend to use another static. For the workshop we can use `DHCP`. The VIP is a floating IP for the cluster for use with HA. Since the first part of the workshop is single node clusters it is not needed.  
+
 ![vip](images/vip.jpg)  
 
 #### Cluster Token
 
 Pick a cluster token.  
+
 ![token](images/token.jpg)  
 
 #### Admin Password
 
 Pick an admin password. I like `Pa22word`.  
+
 ![password](images/password.jpg)  
 
 #### NTP
 
 Enter a local NTP if we have one. Or use the default is the node is online.  
+
 ![ntp](images/ntp.jpg)  
 
 #### Proxy
 
 If we need a proxy to reach the internet we can enter it here.  
+
 ![proxy](images/proxy.jpg)  
 
 #### Remote Config
 
 Harvester can load additional configs from an http service.  
 Feel free to look at the [config example docs](https://docs.harvesterhci.io/v1.2/install/harvester-configuration/). This can be 100% automated with iPXE.  
+
 ![remote_config](images/remote_config.jpg)  
 
 #### Confirm Installation
 
 Now we can confirm all the settings.  
+
 ![confirm](images/confirm.jpg)
 
 #### Wait
@@ -131,22 +142,29 @@ Now we can confirm all the settings.
 This step can take a few minutes. The installer is formatting the drive and unpacking all the bits.  
 Be patient.  
 The node will reboot.
-We can remove the thumb drive.
 It will take some more time for Harvester to be `Ready`.
+
 ![ready](images/ready.jpg)
 
 ### Log In
 
 Navigate to the IP of the your node on https.  
-Usernamme = `admin`  
-Password = `Pa22word` or whatever you set it to before.  
+Bootstrap Password = `Pa22word` or whatever you set it to before.  
+Copy the new password.  
+Uncheck `Allow collection...`
+Check the EULA.
+
 ![login](images/login.jpg)  
+
+### Light Mode
+
+Since you are not crazy you can enable light mode in the Upper Right hand corner. Click the icon and then go to `Preferences`.
 
 ## Setup Networking
 
 First thing we need to do is setup the networking. In an enterprise situation we would isolate the data and management traffic to separate NICs. We need to create a network for the VMs to talk out.  
 We need to navigate `Networks` --> `VM Networks`.  
-Here we are going to `Create` an `UntaggedNetwork` network where we select the `mgmt` Cluster Network.
+Here we are going to `Create` an `UntaggedNetwork` named `vlan1` network with a Cluster Network of `mgmt`.
 
 ![vmnetwork](images/vmnetwork.jpg)  
 
