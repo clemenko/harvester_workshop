@@ -275,7 +275,7 @@ If you have a GUI that won't take your password see if you can `ssh` into the no
 kubectl  -n cattle-system exec $(kubectl -n cattle-system get pods -l app=rancher --no-headers | head -1 | awk '{ print $1 }') -c rancher -- reset-password
 ```
 
-### Harvester cli
+### Harvester cli - BETA
 
 There is a beta cli available at https://github.com/belgaied2/harvester-cli.
 
