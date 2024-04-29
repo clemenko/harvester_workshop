@@ -244,11 +244,11 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
 ```
 
-**The default password for the above cloud-init is `Pa22word`.**
-
 ![template4](images/template4.jpg)
 
 **Now we can click Create** to save.
+
+**The default password for the above cloud-init is `Pa22word`.**
 
 ## Boot VMS
 
